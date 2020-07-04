@@ -4,34 +4,49 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.RadioGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_record.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class RecordActivity : AppCompatActivity() {
+open class RecordActivity : AppCompatActivity() {
 
     var date: LocalDate? = null
     var pref: SharedPreferences? = null
+    var reaction: String? = null
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         date = intent?.getSerializableExtra(MainActivity.extraDate) as LocalDate?
         loadImp()
         loadName()
+        loadReaction()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record)
+        val intent = getIntent()
+        date = intent?.getSerializableExtra(MainActivity.extraDate) as LocalDate?
 
-        //loadImp()
-        //loadName()
+        loadImp()
+        loadName()
+        loadReaction()
 
         plusbutton.setOnClickListener {
             saveName()
             saveImp()
+            reaction?.let {
+                saveReaction(it);
+            }
             Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show()
             finish()
+        }
+        radioReaction.setOnCheckedChangeListener { group, id ->
+            when (id) {
+                R.id.radioButtonLike -> reaction = "like"
+                R.id.radioButtonDislike -> reaction = "dislike"
+            }
         }
     }
 
@@ -68,5 +83,19 @@ class RecordActivity : AppCompatActivity() {
         impressionedittext.setText(loadString("imp"))
     }
 
+
+    private fun saveReaction(kind: String) {
+        saveString("reaction", kind)
+    }
+
+    private fun loadReaction() {
+        reaction = loadString("reaction")
+        reaction?.let {
+            when(it) {
+                "like" -> radioButtonLike.isChecked = true
+                "dislike" -> radioButtonDislike.isChecked = true
+            }
+        }
+    }
 
 }

@@ -61,6 +61,37 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.073" />
 
+    <RadioGroup
+        android:id="@+id/radioReaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/booknameedittext">
+
+        <RadioButton
+            android:id="@+id/radioButtonLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="좋아요"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <RadioButton
+            android:id="@+id/radioButtonDislike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="싫어요"
+            app:layout_constraintBottom_toBottomOf="@id/radioButtonLike"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/radioButtonLike"
+            app:layout_constraintTop_toTopOf="parent" />
+    </RadioGroup>
+
     <ImageView
         android:id="@+id/plusbutton"
         android:layout_width="60dp"

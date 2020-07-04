@@ -17,15 +17,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-    calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
+        calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
 
-        val gotorecord=Intent(this, RecordActivity::class.java)
-        gotorecord.putExtra(extraDate, LocalDate.of(year, month, dayOfMonth))
-        startActivity(gotorecord)
-    }
-
-
+            val gotorecord = Intent(this, RecordActivity::class.java)
+            gotorecord.putExtra(extraDate, LocalDate.of(year, month, dayOfMonth))
+            startActivity(gotorecord)
+        }
 
 
     }
+
 }
